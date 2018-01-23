@@ -1,0 +1,101 @@
+[
+    {
+        "age": 20,
+        "gender": "Male",
+        "eyeColor": "Blue",
+        "height": 1.82,
+        "ownsCar": true,
+        "workingHoursPerWeek": 6,
+        "preferredSocialMedia": "Facebook"
+    },
+    {
+        "age": 28,
+        "gender": "Male",
+        "eyeColor": "Green",
+        "height": 1.829,
+        "ownsCar": false,
+        "workingHoursPerWeek": 0,
+        "preferredSocialMedia": "Facebook"
+    },
+    {
+        "age": 22,
+        "gender": "Male",
+        "eyeColor": "Hazel",
+        "height": 1.8,
+        "ownsCar": true,
+        "workingHoursPerWeek": 18,
+        "preferredSocialMedia": "Twitter"
+    },
+    {
+        "age": 23,
+        "gender": "Male",
+        "eyeColor": "Brown",
+        "height": 1.8,
+        "ownsCar": false,
+        "workingHoursPerWeek": 10,
+        "preferredSocialMedia": "Instagram"
+    },
+    {
+        "age": 23,
+        "gender": "Female",
+        "eyeColor": "Brown",
+        "height": 1.47,
+        "ownsCar": true,
+        "workingHoursPerWeek": 15,
+        "preferredSocialMedia": "Facebook"
+    },
+    {
+        "age": 22,
+        "gender": "Male",
+        "eyeColor": "Brown",
+        "height": 2.9,
+        "ownsCar": false,
+        "workingHoursPerWeek": 25,
+        "preferredSocialMedia": "Instagram"
+    },
+    {
+        "age": 30,
+        "gender": "Female",
+        "eyeColor": "Brown",
+        "height": 1.5,
+        "ownsCar": false,
+        "workingHoursPerWeek": 12,
+        "preferredSocialMedia": "Instagram"
+    },
+    {
+        "age": 24,
+        "gender": "Female",
+        "eyeColor": "Blue",
+        "height": 1.67,
+        "ownsCar": true,
+        "workingHoursPerWeek": 35,
+        "preferredSocialMedia": "Instagram"
+    },
+    {
+        "age": 23,
+        "gender": "Male",
+        "eyeColor": "Hazel",
+        "height": 1.2,
+        "ownsCar": false,
+        "workingHoursPerWeek": 0,
+        "preferredSocialMedia": "Line"
+    },
+    {
+        "age": 29,
+        "gender": "Female",
+        "eyeColor": "Brown",
+        "height": 1.7,
+        "ownsCar": true,
+        "workingHoursPerWeek": 0,
+        "preferredSocialMedia": "Twitter"
+    },
+    {
+        "age": 22,
+        "gender": "Male",
+        "eyeColor": "Blue",
+        "height": 1.65,
+        "ownsCar": true,
+        "workingHoursPerWeek": 20,
+        "preferredSocialMedia": "Twitter"
+    }
+]
