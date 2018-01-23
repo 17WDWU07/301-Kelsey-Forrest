@@ -97,5 +97,14 @@
         "ownsCar": true,
         "workingHoursPerWeek": 20,
         "preferredSocialMedia": "Twitter"
+    },
+    {
+        "age": 31,
+        "gender": "Male",
+        "eyeColor": "Blue",
+        "height": 1.6,
+        "ownsCar": true,
+        "workingHoursPerWeek": 0,
+        "preferredSocialMedia": "Facebook"
     }
 ]
