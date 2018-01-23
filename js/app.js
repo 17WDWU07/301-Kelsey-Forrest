@@ -9,7 +9,7 @@ function getData() {
         error: function(response) {
             console.log("Error Code: " + response.status + "\n" + response.statusText);
         }
-    })
+    });
 }
 
 getData();
