@@ -91,6 +91,7 @@ function getData() {
             countSocialMedia(dataFromJSON);
             barGraphCounter(dataFromJSON);
 
+            // Listener for genderPicker statechange event
             google.visualization.events.addListener(genderPicker, "statechange", function() {
                 var gender = genderPicker.getState();
                 var currentGender = gender.selectedValues[0];
@@ -118,6 +119,34 @@ function getData() {
                 }
             });
 
+            // Listener for ageSlider statechange event
+            google.visualization.events.addListener(ageSlider, "statechange", function() {
+                var range = ageSlider.getState();
+                console.log(range);
+                var view = new google.visualization.DataView(data);
+
+                view.setRows(data.getFilteredRows([
+                    {
+                        column: 6,
+                        minValue: range.lowValue,
+                        maxValue: range.highValue
+                    },
+                    {
+                        column: 0,
+                        minValue: range.lowValue,
+                        maxValue: range.highValue
+                    }
+                ]));
+
+                var filteredRows = view.ol;
+                var newData = [];
+
+                for (var i = 0; i < filteredRows.length; i++) {
+                    newData.push(dataFromJSON[filteredRows[i]]);
+                }
+
+                countSocialMedia(newData);
+            });
         },
         error: function(response) {
             console.log("Error Code: " + response.status + "\n" + response.statusText);
