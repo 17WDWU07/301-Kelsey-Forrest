@@ -46,6 +46,23 @@ function getData() {
             }
         });
 
+        // var pieChart = new google.visualization.ChartWrapper({
+        //     chartType: 'PieChart',
+        //     containerId: 'donutChart',
+        //     options:{
+        //         title: 'Age',
+        //         pieHole: 0.4,
+        //         width: '100%',
+        //         height: '100%'
+                
+        //     },
+        //     view:{
+        //         columns: [1,5]
+        //     }
+        // });
+        
+
+
       var genderPicker = new google.visualization.ControlWrapper({
 
                 controlType: 'CategoryFilter',
@@ -62,6 +79,7 @@ function getData() {
             });
         dashboard.bind([genderPicker], [scatterChart]);
         dashboard.draw(data);
+        countSocialMedia(dataFromJSON);
 
         },
         error: function(response) {
@@ -70,3 +88,45 @@ function getData() {
     });
 }
 
+
+function countSocialMedia(data){
+
+    var dataSocialMedia = new google.visualization.DataTable();
+    dataSocialMedia.addColumn('string', 'Social Media');
+    dataSocialMedia.addColumn('number', 'Amount');
+    var instagram = 0;
+    var facebook = 0;
+    var twitter = 0;
+    var line = 0;
+
+    for (var i = 0; i < data.length; i++) {
+        switch (data[i].preferredSocialMedia){
+            case ("Facebook"):
+            facebook++;
+            break;
+            case ("Instagram"):
+            instagram++;
+            break;
+            case ("Twitter"):
+            twitter++;
+            break;
+            case("Line"):
+            line++;
+            break;
+            default: console.log('No such social media');
+            break;
+        }
+    }
+
+    dataSocialMedia.addRow(["Facebook", facebook]);
+    dataSocialMedia.addRow(["Instagram", instagram]);
+    dataSocialMedia.addRow(["Twitter", twitter]);
+    dataSocialMedia.addRow(["Line", line]);
+
+    var options = {
+        title: "Preferred Social Media",
+        pieHole: 0.4
+    }
+    var donut = new google.visualization.PieChart(document.getElementById('donutChart'));
+    donut.draw(dataSocialMedia, options);
+}
