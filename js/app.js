@@ -65,17 +65,17 @@ function getData() {
             }
         });
 
-        var barChart = new google.visualization.ChartWrapper({
-            chartType: 'Bar',
-            containerId: 'barChart',
-            options:{
-                title: 'Gender Vs Car Ownership',
-                isStacked: true
-            },
-            view:{
-                columns: [2,1]
-            }
-        });
+        // var barChart = new google.visualization.ChartWrapper({
+        //     chartType: 'Bar',
+        //     containerId: 'barChart',
+        //     options:{
+        //         title: 'Gender Vs Car Ownership',
+        //         isStacked: true
+        //     },
+        //     view:{
+        //         columns: [2,1]
+        //     }
+        // });
 
         var genderPicker = new google.visualization.ControlWrapper({
 
@@ -91,9 +91,10 @@ function getData() {
                 
                 }
             });
-        dashboard.bind([genderPicker], [scatterChart, bubbleChart, barChart]);
+        dashboard.bind([genderPicker], [scatterChart, bubbleChart]);
         dashboard.draw(data);
         countSocialMedia(dataFromJSON);
+        barGraphCounter(dataFromJSON);
 
             google.visualization.events.addListener(genderPicker, "statechange", function() {
                 var gender = genderPicker.getState();
@@ -165,4 +166,39 @@ function countSocialMedia(data){
     }
     var donut = new google.visualization.PieChart(document.getElementById('donutChart'));
     donut.draw(dataSocialMedia, options);
+}
+
+function barGraphCounter(data) {
+    var dataBarGraph = new google.visualization.DataTable();
+    dataBarGraph.addColumn("string", "Gender");
+    dataBarGraph.addColumn("number", "Car");
+    dataBarGraph.addColumn("number", "No Car");
+
+    var maleHasCar = 0;
+    var maleNoCar = 0;
+    var femaleHasCar = 0;
+    var femaleNoCar = 0;
+
+    for (var i = 0; i < data.length; i++) {
+        if (data[i].ownsCar && data[i].gender === "Male") {
+            maleHasCar++;
+        } else if (data[i].ownsCar && data[i].gender === "Female") {
+            femaleHasCar++;
+        } else if (!data[i].ownsCar && data[i].gender === "Male") {
+            maleNoCar++;
+        } else if (!data[i].ownsCar && data[i].gender === "Female") {
+            femaleNoCar++;
+        }
+    }
+
+    dataBarGraph.addRow(["Male", maleHasCar, maleNoCar]);
+    dataBarGraph.addRow(["Female", femaleHasCar, femaleNoCar]);
+
+    var options = {
+        title: "Title",
+        isStacked: true
+    }
+
+    var bar = new google.visualization.BarChart(document.getElementById("barChart"));
+    bar.draw(dataBarGraph, options);
 }
