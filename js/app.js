@@ -75,7 +75,18 @@ function getData() {
                 }
             });
 
-            dashboard.bind([genderPicker], [scatterChart, bubbleChart]);
+            var ageSlider = new google.visualization.ControlWrapper({
+                controlType: 'NumberRangeFilter',
+                containerId: 'ageSlider',
+                options:{
+                    filterColumnLabel: 'Age',
+                  ui:{
+                     labelStacking:'vertical'
+                 } 
+                }
+            });
+
+            dashboard.bind([genderPicker, ageSlider], [scatterChart, bubbleChart]);
             dashboard.draw(data);
             countSocialMedia(dataFromJSON);
             barGraphCounter(dataFromJSON);
