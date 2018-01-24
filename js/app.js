@@ -32,7 +32,7 @@ function getData() {
             containerId: 'scatterChart',
             options:{
                 title: 'Age Vs. Height',
-                legend 'none'
+                legend: 'none'
             },
             view:{
                 columns: [0, 3]
