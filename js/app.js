@@ -16,6 +16,8 @@ function getData() {
             data.addColumn('boolean', 'Car Ownership');
             data.addColumn('number', 'Hours Of Work');
             data.addColumn('string', 'Social Media');
+            data.addColumn('string', 'ID');
+
 
             for (var i = 0; i < dataFromJSON.length; i++) {
                 data.addRow([
@@ -25,7 +27,8 @@ function getData() {
                     dataFromJSON[i].height,
                     dataFromJSON[i].ownsCar,
                     dataFromJSON[i].workingHoursPerWeek,
-                    dataFromJSON[i].preferredSocialMedia
+                    dataFromJSON[i].preferredSocialMedia,
+                    dataFromJSON[i].id
                     ]);
             };
 
@@ -37,9 +40,8 @@ function getData() {
             containerId: 'scatterChart',
             options:{
                 title: 'Age Vs. Height',
-                legend: 'none',
-                width: '100%',
-                height: '100%'
+                legend: 'none'
+               
             },
             view:{
                 columns: [0, 3]
@@ -61,9 +63,24 @@ function getData() {
         //     }
         // });
         
+        var bubbleChart = new google.visualization.ChartWrapper({
+            chartType: 'BubbleChart',
+            containerId: 'bubbleChart',
+            options:{
+                title:'Title',
+                hAxis: {
+                    title: 'Age'
+                },
+                vAxis:{
+                    title: 'Height(m)'
+                }
+            },
+            view:{
+                columns: [7, 0, 3, 6 ,5]
+            }
+        });
 
-
-      var genderPicker = new google.visualization.ControlWrapper({
+        var genderPicker = new google.visualization.ControlWrapper({
 
                 controlType: 'CategoryFilter',
                 containerId: 'genderSelect',
@@ -77,7 +94,7 @@ function getData() {
                 
                 }
             });
-        dashboard.bind([genderPicker], [scatterChart]);
+        dashboard.bind([genderPicker], [scatterChart, bubbleChart]);
         dashboard.draw(data);
         countSocialMedia(dataFromJSON);
 
