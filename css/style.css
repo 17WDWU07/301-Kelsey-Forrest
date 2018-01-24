@@ -13,7 +13,8 @@ body {
 }
 
 .chart,
-.heading {
+.heading,
+#controls {
     padding: 10px;
     margin: 10px;
     background-color: rgb(76, 81, 97);
@@ -24,6 +25,10 @@ body {
     text-align: center;
     color: white;
     letter-spacing: 3px;
+}
+
+.chart {
+    height: 350px;
 }
 
 .chart:nth-child(1) {
