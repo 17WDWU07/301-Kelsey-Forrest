@@ -49,7 +49,7 @@ function getData() {
                 chartType: 'BubbleChart',
                 containerId: 'bubbleChart',
                 options:{
-                    title:'Bubble Chart Comparing Age, Height, and Income',
+                    title:'Bubble Chart Comparing Age, Height, and Average Hours Worked per week',
                     hAxis: {
                         title: 'Age'
                     },
@@ -187,7 +187,7 @@ function barGraphCounter(data) {
     dataBarGraph.addRow(["Female", femaleHasCar, femaleNoCar]);
 
     var options = {
-        title: "Car Ownership against Gender",
+        title: "Car Ownership Vs Gender",
         isStacked: true
     }
 
