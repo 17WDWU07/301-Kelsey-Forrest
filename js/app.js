@@ -1,10 +1,14 @@
+google.charts.load('current', {packages: ['corechart', 'controls']});
+google.charts.setOnLoadCallback(getData);
+
 function getData() {
     $.ajax({
         method: "GET",
         dataType: "json",
         url: "./js/classData.json",
         success: function(data) {
-            var tableData = new google. visualization.DataTable();
+            console.log(data);
+            var tableData = new google.visualization.DataTable();
             tableData.addColumn('number', 'Age');
             tableData.addColumn('string', 'Gender');
             tableData.addColumn('string','Eye Colour');
@@ -45,4 +49,3 @@ function getData() {
     });
 }
 
-getData();
