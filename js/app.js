@@ -47,21 +47,6 @@ function getData() {
                 columns: [0, 3]
             }
         });
-
-        // var pieChart = new google.visualization.ChartWrapper({
-        //     chartType: 'PieChart',
-        //     containerId: 'donutChart',
-        //     options:{
-        //         title: 'Age',
-        //         pieHole: 0.4,
-        //         width: '100%',
-        //         height: '100%'
-                
-        //     },
-        //     view:{
-        //         columns: [1,5]
-        //     }
-        // });
         
         var bubbleChart = new google.visualization.ChartWrapper({
             chartType: 'BubbleChart',
