@@ -114,9 +114,7 @@ function getData() {
     });
 }
 
-
 function countSocialMedia(data){
-
     var dataSocialMedia = new google.visualization.DataTable();
     dataSocialMedia.addColumn('string', 'Social Media');
     dataSocialMedia.addColumn('number', 'Amount');
