@@ -81,6 +81,28 @@ function getData() {
         dashboard.draw(data);
         countSocialMedia(dataFromJSON);
 
+            google.visualization.events.addListener(genderPicker, "statechange", function() {
+                var gender = genderPicker.getState();
+                var currentGender = gender.selectedValues[0];
+                var view = new google.visualization.DataView(data);
+
+                view.setRows(data.getFilteredRows([
+                    {
+                        column: 1,
+                        value: currentGender
+                    }
+                ]));
+
+                var filteredRows = view.ol;
+                var newData = [];
+
+                for (var i = 0; i < filteredRows.length; i++) {
+                    newData.push(dataFromJSON[filteredRows[i]]);
+                }
+
+                countSocialMedia(newData);
+            });
+
         },
         error: function(response) {
             console.log("Error Code: " + response.status + "\n" + response.statusText);
