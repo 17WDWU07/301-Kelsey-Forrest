@@ -7,7 +7,6 @@ function getData() {
         dataType: "json",
         url: "./js/classData.json",
         success: function(dataFromJSON) {
-            console.log(dataFromJSON);
             var data = new google.visualization.DataTable();
             data.addColumn('number', 'Age');
             data.addColumn('string', 'Gender');
@@ -17,7 +16,6 @@ function getData() {
             data.addColumn('number', 'Hours Of Work');
             data.addColumn('string', 'Social Media');
             data.addColumn('string', 'ID');
-
 
             for (var i = 0; i < dataFromJSON.length; i++) {
                 data.addRow([
@@ -29,56 +27,42 @@ function getData() {
                     dataFromJSON[i].workingHoursPerWeek,
                     dataFromJSON[i].preferredSocialMedia,
                     dataFromJSON[i].id
-                    ]);
+                ]);
             };
 
-        var dashboard = new google.visualization.Dashboard(
-            document.getElementById('dashboard'));
+            var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard'));
 
-        var scatterChart = new google.visualization.ChartWrapper({
-            chartType: 'ScatterChart',
-            containerId: 'scatterChart',
-            options:{
-                title: 'Age Vs. Height',
-                legend: 'none'
-               
-            },
-            view:{
-                columns: [0, 3]
-            }
-        });
-        
-        var bubbleChart = new google.visualization.ChartWrapper({
-            chartType: 'BubbleChart',
-            containerId: 'bubbleChart',
-            options:{
-                title:'Title',
-                hAxis: {
-                    title: 'Age'
+            var scatterChart = new google.visualization.ChartWrapper({
+                chartType: 'ScatterChart',
+                containerId: 'scatterChart',
+                options:{
+                    title: 'Age Vs. Height',
+                    legend: 'none'
+                
                 },
-                vAxis:{
-                    title: 'Height(m)'
+                view:{
+                    columns: [0, 3]
                 }
-            },
-            view:{
-                columns: [7, 0, 3, 6 ,5]
-            }
-        });
+            });
+            
+            var bubbleChart = new google.visualization.ChartWrapper({
+                chartType: 'BubbleChart',
+                containerId: 'bubbleChart',
+                options:{
+                    title:'Title',
+                    hAxis: {
+                        title: 'Age'
+                    },
+                    vAxis:{
+                        title: 'Height(m)'
+                    }
+                },
+                view:{
+                    columns: [7, 0, 3, 6 ,5]
+                }
+            });
 
-        // var barChart = new google.visualization.ChartWrapper({
-        //     chartType: 'Bar',
-        //     containerId: 'barChart',
-        //     options:{
-        //         title: 'Gender Vs Car Ownership',
-        //         isStacked: true
-        //     },
-        //     view:{
-        //         columns: [2,1]
-        //     }
-        // });
-
-        var genderPicker = new google.visualization.ControlWrapper({
-
+            var genderPicker = new google.visualization.ControlWrapper({
                 controlType: 'CategoryFilter',
                 containerId: 'genderSelect',
                 options:{
@@ -91,10 +75,11 @@ function getData() {
                 
                 }
             });
-        dashboard.bind([genderPicker], [scatterChart, bubbleChart]);
-        dashboard.draw(data);
-        countSocialMedia(dataFromJSON);
-        barGraphCounter(dataFromJSON);
+
+            dashboard.bind([genderPicker], [scatterChart, bubbleChart]);
+            dashboard.draw(data);
+            countSocialMedia(dataFromJSON);
+            barGraphCounter(dataFromJSON);
 
             google.visualization.events.addListener(genderPicker, "statechange", function() {
                 var gender = genderPicker.getState();
@@ -115,7 +100,12 @@ function getData() {
                     newData.push(dataFromJSON[filteredRows[i]]);
                 }
 
-                countSocialMedia(newData);
+                // Workaround for having no current gender selected
+                if (!currentGender) {
+                    countSocialMedia(dataFromJSON);
+                } else {
+                    countSocialMedia(newData);
+                }
             });
 
         },
@@ -139,19 +129,20 @@ function countSocialMedia(data){
     for (var i = 0; i < data.length; i++) {
         switch (data[i].preferredSocialMedia){
             case ("Facebook"):
-            facebook++;
-            break;
+                facebook++;
+                break;
             case ("Instagram"):
-            instagram++;
-            break;
+                instagram++;
+                break;
             case ("Twitter"):
-            twitter++;
-            break;
+                twitter++;
+                break;
             case("Line"):
-            line++;
-            break;
-            default: console.log('No such social media');
-            break;
+                line++;
+                break;
+            default:
+                console.log('No such social media');
+                break;
         }
     }
 
@@ -164,6 +155,7 @@ function countSocialMedia(data){
         title: "Preferred Social Media",
         pieHole: 0.4
     }
+    
     var donut = new google.visualization.PieChart(document.getElementById('donutChart'));
     donut.draw(dataSocialMedia, options);
 }
