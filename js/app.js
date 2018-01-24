@@ -66,13 +66,12 @@ function getData() {
                 controlType: 'CategoryFilter',
                 containerId: 'genderSelect',
                 options:{
-                        filterColumnLabel: 'Gender',
-                        ui:{
-                            allowMultiple: false,
-                            allowTyping: false,
-                            labelStacking:'vertical'
-                        }
-                
+                    filterColumnLabel: 'Gender',
+                    ui:{
+                        allowMultiple: false,
+                        allowTyping: false,
+                        labelStacking:'vertical'
+                    }
                 }
             });
 
