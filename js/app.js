@@ -315,13 +315,30 @@ function barGraphCounter(data) {
 
     var options = {
         title: "Car Ownership Vs Gender",
-         titleTextStyle:{
-                        color: 'white',
-                        fontName: 'sans-serif',
-                        fontSize: 20
-                    },
+        titleTextStyle:{
+            color: 'white',
+            fontName: 'sans-serif',
+            fontSize: 20
+        },
         isStacked: true,
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        hAxis: {
+            baselineColor: "white",
+            textStyle: {
+                color: "white"
+            }
+        },
+        vAxis: {
+            textStyle: {
+                color: "white"
+            }
+        },
+        legend: {
+            textStyle: {
+                color: "white"
+            }
+        },
+        colors: ['#78fc71', "#f75b42"]
     }
 
     var bar = new google.visualization.BarChart(document.getElementById("barChart"));
