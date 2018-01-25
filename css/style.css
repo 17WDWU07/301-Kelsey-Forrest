@@ -56,6 +56,11 @@ body {
 
 /* Control Styling */
 
+#ageSlider,
+#genderSelect {
+    margin: 20px 0;
+}
+
 /* Age Filter */
 
 .google-visualization-controls-rangefilter .goog-inline-block {
