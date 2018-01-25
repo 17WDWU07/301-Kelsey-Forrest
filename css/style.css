@@ -53,3 +53,30 @@ body {
     grid-row: 1 / 3;
     color: white;
 }
+
+/* Control Styling */
+
+#ageSlider,
+#genderSelect {
+    margin: 20px 0;
+}
+
+/* Age Filter */
+
+.google-visualization-controls-rangefilter .goog-inline-block {
+    width: 100%;
+    text-align: center;
+}
+
+.google-visualization-controls-rangefilter .google-visualization-controls-slider-handle {
+    background-color: rgb(57, 60, 73);
+    opacity: 1;
+}
+
+.google-visualization-controls-rangefilter .google-visualization-controls-rangefilter-thumblabel {
+    color: white;
+}
+
+.google-visualization-controls-rangefilter .google-visualization-controls-slider-horizontal {
+    outline: 0;
+}

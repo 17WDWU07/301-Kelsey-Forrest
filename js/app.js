@@ -124,15 +124,22 @@ function getData() {
             countSocialMedia(dataFromJSON);
             barGraphCounter(dataFromJSON);
 
+            // Listener for genderPicker statechange event
             google.visualization.events.addListener(genderPicker, "statechange", function() {
                 var gender = genderPicker.getState();
                 var currentGender = gender.selectedValues[0];
                 var view = new google.visualization.DataView(data);
+                var ageRange = ageSlider.getState();
 
                 view.setRows(data.getFilteredRows([
                     {
                         column: 1,
                         value: currentGender
+                    },
+                    {
+                        column: 0,
+                        minValue: ageRange.lowValue,
+                        maxValue: ageRange.highValue
                     }
                 ]));
 
@@ -151,6 +158,44 @@ function getData() {
                 }
             });
 
+            // Listener for ageSlider statechange event
+            google.visualization.events.addListener(ageSlider, "statechange", function() {
+                var ageRange = ageSlider.getState();
+                var gender = genderPicker.getState();
+                var currentGender = gender.selectedValues[0];
+                var view = new google.visualization.DataView(data);
+
+                if (!currentGender) {
+                    view.setRows(data.getFilteredRows([
+                        {
+                            column: 0,
+                            minValue: ageRange.lowValue,
+                            maxValue: ageRange.highValue
+                        }
+                    ]));
+                } else {
+                    view.setRows(data.getFilteredRows([
+                        {
+                            column: 1,
+                            value: currentGender
+                        },
+                        {
+                            column: 0,
+                            minValue: ageRange.lowValue,
+                            maxValue: ageRange.highValue
+                        }
+                    ]));
+                }
+
+                var filteredRows = view.ol;
+                var newData = [];
+
+                for (var i = 0; i < filteredRows.length; i++) {
+                    newData.push(dataFromJSON[filteredRows[i]]);
+                }
+
+                countSocialMedia(newData);
+            });
         },
         error: function(response) {
             console.log("Error Code: " + response.status + "\n" + response.statusText);
