@@ -37,6 +37,33 @@ function getData() {
                 containerId: 'scatterChart',
                 options:{
                     title: 'Age Vs. Height',
+                    colors: ['#07e6f2'],
+                    pointSize: 8,
+                    hAxis:{
+                        title: 'Age',
+                       
+                        titleTextStyle:{
+                            color:'white'
+                        },
+                        textStyle:{
+                            color:'white'
+                        }
+                    },
+                    vAxis:{
+                        title: 'Height',
+                        titleTextStyle:{
+                            color: 'white'
+                        },
+                         textStyle:{
+                            color:'white'
+                        }
+                    },
+                    titleTextStyle:{
+                        color: 'white',
+                        fontName: 'sans-serif',
+                        fontSize: 20
+                    },
+                    backgroundColor: 'transparent',
                     legend: 'none'
                 
                 },
@@ -50,8 +77,14 @@ function getData() {
                 containerId: 'bubbleChart',
                 options:{
                     title:'Bubble Chart Comparing Age, Height, and Average Hours Worked per week',
+                    backgroundColor: 'transparent',
                     hAxis: {
                         title: 'Age'
+                    },
+                     titleTextStyle:{
+                        color: 'white',
+                        fontName: 'sans-serif',
+                        fontSize: 15
                     },
                     vAxis:{
                         title: 'Height (m)'
@@ -82,7 +115,7 @@ function getData() {
                     filterColumnLabel: 'Age',
                   ui:{
                      labelStacking:'vertical'
-                 } 
+                 }
                 }
             });
 
@@ -161,7 +194,23 @@ function countSocialMedia(data){
 
     var options = {
         title: "Preferred Social Media",
-        pieHole: 0.4
+        pieSliceBorderColor: 'transparent',
+        colors: ['#07e6f2'],
+        slices:[
+        {color: '#07e6f2'}, {color:'#a042f7'}, {color: '#78fc71'}, {color: '#f7fc71'}
+        ],
+        legend:{
+            textStyle:{
+                color: 'white'
+            }
+        },
+         titleTextStyle:{
+                        color: 'white',
+                        fontName: 'sans-serif',
+                        fontSize: 20
+                    },
+        pieHole: 0.4,
+        backgroundColor: 'transparent'
     }
     
     var donut = new google.visualization.PieChart(document.getElementById('donutChart'));
@@ -196,7 +245,13 @@ function barGraphCounter(data) {
 
     var options = {
         title: "Car Ownership Vs Gender",
-        isStacked: true
+         titleTextStyle:{
+                        color: 'white',
+                        fontName: 'sans-serif',
+                        fontSize: 20
+                    },
+        isStacked: true,
+        backgroundColor: 'transparent'
     }
 
     var bar = new google.visualization.BarChart(document.getElementById("barChart"));
