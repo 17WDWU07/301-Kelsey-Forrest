@@ -157,17 +157,27 @@ function getData() {
                 var view = new google.visualization.DataView(data);
                 var ageRange = ageSlider.getState();
 
-                view.setRows(data.getFilteredRows([
-                    {
-                        column: 1,
-                        value: currentGender
-                    },
-                    {
-                        column: 0,
-                        minValue: ageRange.lowValue,
-                        maxValue: ageRange.highValue
-                    }
-                ]));
+                if (!currentGender) {
+                    view.setRows(data.getFilteredRows([
+                        {
+                            column: 0,
+                            minValue: ageRange.lowValue,
+                            maxValue: ageRange.highValue
+                        }
+                    ]));
+                } else {
+                    view.setRows(data.getFilteredRows([
+                        {
+                            column: 1,
+                            value: currentGender
+                        },
+                        {
+                            column: 0,
+                            minValue: ageRange.lowValue,
+                            maxValue: ageRange.highValue
+                        }
+                    ]));
+                }
 
                 var filteredRows = view.ol;
                 var newData = [];
@@ -176,12 +186,7 @@ function getData() {
                     newData.push(dataFromJSON[filteredRows[i]]);
                 }
 
-                // Workaround for having no current gender selected
-                if (!currentGender) {
-                    countSocialMedia(dataFromJSON);
-                } else {
-                    countSocialMedia(newData);
-                }
+                countSocialMedia(newData);
             });
 
             // Listener for ageSlider statechange event
