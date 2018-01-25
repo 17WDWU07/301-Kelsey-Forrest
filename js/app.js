@@ -78,16 +78,41 @@ function getData() {
                 options:{
                     title:'Bubble Chart Comparing Age, Height, and Average Hours Worked per week',
                     backgroundColor: 'transparent',
-                    hAxis: {
-                        title: 'Age'
+                    bubble: {
+                        opacity: 0.7,
+                        stroke: "transparent",
+                        textStyle: {
+                            color: "white"
+                        }
                     },
-                     titleTextStyle:{
+                    legend: {
+                        textStyle: {
+                            color: "white"
+                        }
+                    },
+                    colors: ['#07e6f2','#a042f7', '#78fc71', '#f7fc71'],
+                    hAxis: {
+                        title: 'Age',
+                        titleTextStyle: {
+                            color: "white"
+                        },
+                        textStyle:{
+                            color:'white'
+                        }
+                    },
+                    titleTextStyle: {
                         color: 'white',
                         fontName: 'sans-serif',
                         fontSize: 15
                     },
-                    vAxis:{
-                        title: 'Height (m)'
+                    vAxis: {
+                        title: 'Height (m)',
+                        titleTextStyle: {
+                            color: "white"
+                        },
+                        textStyle:{
+                            color:'white'
+                        }
                     }
                 },
                 view:{
