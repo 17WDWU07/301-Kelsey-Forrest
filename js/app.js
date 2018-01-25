@@ -96,11 +96,17 @@ function getData() {
                 var gender = genderPicker.getState();
                 var currentGender = gender.selectedValues[0];
                 var view = new google.visualization.DataView(data);
+                var ageRange = ageSlider.getState();
 
                 view.setRows(data.getFilteredRows([
                     {
                         column: 1,
                         value: currentGender
+                    },
+                    {
+                        column: 0,
+                        minValue: ageRange.lowValue,
+                        maxValue: ageRange.highValue
                     }
                 ]));
 
@@ -121,22 +127,32 @@ function getData() {
 
             // Listener for ageSlider statechange event
             google.visualization.events.addListener(ageSlider, "statechange", function() {
-                var range = ageSlider.getState();
-                console.log(range);
+                var ageRange = ageSlider.getState();
+                var gender = genderPicker.getState();
+                var currentGender = gender.selectedValues[0];
                 var view = new google.visualization.DataView(data);
 
-                view.setRows(data.getFilteredRows([
-                    {
-                        column: 6,
-                        minValue: range.lowValue,
-                        maxValue: range.highValue
-                    },
-                    {
-                        column: 0,
-                        minValue: range.lowValue,
-                        maxValue: range.highValue
-                    }
-                ]));
+                if (!currentGender) {
+                    view.setRows(data.getFilteredRows([
+                        {
+                            column: 0,
+                            minValue: ageRange.lowValue,
+                            maxValue: ageRange.highValue
+                        }
+                    ]));
+                } else {
+                    view.setRows(data.getFilteredRows([
+                        {
+                            column: 1,
+                            value: currentGender
+                        },
+                        {
+                            column: 0,
+                            minValue: ageRange.lowValue,
+                            maxValue: ageRange.highValue
+                        }
+                    ]));
+                }
 
                 var filteredRows = view.ol;
                 var newData = [];
