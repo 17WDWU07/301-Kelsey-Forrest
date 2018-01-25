@@ -187,6 +187,7 @@ function getData() {
                 }
 
                 countSocialMedia(newData);
+                barGraphCounter(newData);
             });
 
             // Listener for ageSlider statechange event
