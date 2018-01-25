@@ -36,7 +36,7 @@ function getData() {
                 chartType: 'ScatterChart',
                 containerId: 'scatterChart',
                 options:{
-                    title: 'Age Vs. Height',
+                    title: 'Age Vs. Height (Click a point to see more information)',
                     colors: ['#07e6f2'],
                     pointSize: 8,
                     hAxis:{
@@ -78,16 +78,41 @@ function getData() {
                 options:{
                     title:'Bubble Chart Comparing Age, Height, and Average Hours Worked per week',
                     backgroundColor: 'transparent',
-                    hAxis: {
-                        title: 'Age'
+                    bubble: {
+                        opacity: 0.7,
+                        stroke: "transparent",
+                        textStyle: {
+                            color: "white"
+                        }
                     },
-                     titleTextStyle:{
+                    legend: {
+                        textStyle: {
+                            color: "white"
+                        }
+                    },
+                    colors: ['#07e6f2','#a042f7', '#78fc71', '#f7fc71'],
+                    hAxis: {
+                        title: 'Age',
+                        titleTextStyle: {
+                            color: "white"
+                        },
+                        textStyle:{
+                            color:'white'
+                        }
+                    },
+                    titleTextStyle: {
                         color: 'white',
                         fontName: 'sans-serif',
                         fontSize: 15
                     },
-                    vAxis:{
-                        title: 'Height (m)'
+                    vAxis: {
+                        title: 'Height (m)',
+                        titleTextStyle: {
+                            color: "white"
+                        },
+                        textStyle:{
+                            color:'white'
+                        }
                     }
                 },
                 view:{
@@ -197,6 +222,28 @@ function getData() {
 
                 countSocialMedia(newData);
             });
+
+            // Listener for click events on scatter chart
+            google.visualization.events.addListener(scatterChart, "select", function() {
+                var tableRow = scatterChart.getChart().getSelection()[0].row;
+                var personData = dataFromJSON[tableRow];
+                console.log(personData);
+                
+                if (personData) {
+                    document.getElementById("id").textContent = "ID: " + personData.id;
+                    document.getElementById("age").textContent = "Age: " + personData.age;
+                    document.getElementById("gender").textContent = "Gender: " + personData.gender;
+                    document.getElementById("eyeColor").textContent = "Eye Color: " + personData.eyeColor;
+                    document.getElementById("height").textContent = "Height: " + personData.id + "m";
+                    if (personData.ownsCar) {
+                        document.getElementById("ownsCar").textContent = "Owns Car: Yes";
+                    } else {
+                        document.getElementById("ownsCar").textContent = "Owns Car: No";
+                    }
+                    document.getElementById("hoursOfWork").textContent = "Average Weekly Working Hours: " + personData.workingHoursPerWeek;
+                    document.getElementById("favSocialMedia").textContent = "Favourite Social Media: " + personData.preferredSocialMedia;
+                }
+            });
         },
         error: function(response) {
             console.log("Error Code: " + response.status + "\n" + response.statusText);
@@ -291,13 +338,30 @@ function barGraphCounter(data) {
 
     var options = {
         title: "Car Ownership Vs Gender",
-         titleTextStyle:{
-                        color: 'white',
-                        fontName: 'sans-serif',
-                        fontSize: 20
-                    },
+        titleTextStyle:{
+            color: 'white',
+            fontName: 'sans-serif',
+            fontSize: 20
+        },
         isStacked: true,
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        hAxis: {
+            baselineColor: "white",
+            textStyle: {
+                color: "white"
+            }
+        },
+        vAxis: {
+            textStyle: {
+                color: "white"
+            }
+        },
+        legend: {
+            textStyle: {
+                color: "white"
+            }
+        },
+        colors: ['#78fc71', "#f75b42"]
     }
 
     var bar = new google.visualization.BarChart(document.getElementById("barChart"));
