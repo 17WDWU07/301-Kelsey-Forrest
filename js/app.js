@@ -226,6 +226,7 @@ function getData() {
             // Listener for click events on scatter chart
             google.visualization.events.addListener(scatterChart, "select", function() {
                 var tableRow = scatterChart.getChart().getSelection()[0].row;
+                scatterChart.getChart().setSelection();
                 var personData = dataFromJSON[tableRow];
                 console.log(personData);
                 
@@ -234,7 +235,7 @@ function getData() {
                     document.getElementById("age").textContent = "Age: " + personData.age;
                     document.getElementById("gender").textContent = "Gender: " + personData.gender;
                     document.getElementById("eyeColor").textContent = "Eye Color: " + personData.eyeColor;
-                    document.getElementById("height").textContent = "Height: " + personData.id + "m";
+                    document.getElementById("height").textContent = "Height: " + personData.height + "m";
                     if (personData.ownsCar) {
                         document.getElementById("ownsCar").textContent = "Owns Car: Yes";
                     } else {
