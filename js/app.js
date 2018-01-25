@@ -36,7 +36,7 @@ function getData() {
                 chartType: 'ScatterChart',
                 containerId: 'scatterChart',
                 options:{
-                    title: 'Age Vs. Height',
+                    title: 'Age Vs. Height (Click a point to see more information)',
                     colors: ['#07e6f2'],
                     pointSize: 8,
                     hAxis:{
@@ -220,6 +220,28 @@ function getData() {
                 }
 
                 countSocialMedia(newData);
+            });
+
+            // Listener for click events on scatter chart
+            google.visualization.events.addListener(scatterChart, "select", function() {
+                var tableRow = scatterChart.getChart().getSelection()[0].row;
+                var personData = dataFromJSON[tableRow];
+                console.log(personData);
+                
+                if (personData) {
+                    document.getElementById("id").textContent = "ID: " + personData.id;
+                    document.getElementById("age").textContent = "Age: " + personData.age;
+                    document.getElementById("gender").textContent = "Gender: " + personData.gender;
+                    document.getElementById("eyeColor").textContent = "Eye Color: " + personData.eyeColor;
+                    document.getElementById("height").textContent = "Height: " + personData.id + "m";
+                    if (personData.ownsCar) {
+                        document.getElementById("ownsCar").textContent = "Owns Car: Yes";
+                    } else {
+                        document.getElementById("ownsCar").textContent = "Owns Car: No";
+                    }
+                    document.getElementById("hoursOfWork").textContent = "Average Weekly Working Hours: " + personData.workingHoursPerWeek;
+                    document.getElementById("favSocialMedia").textContent = "Favourite Social Media: " + personData.preferredSocialMedia;
+                }
             });
         },
         error: function(response) {
