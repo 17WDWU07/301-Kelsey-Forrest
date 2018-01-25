@@ -221,6 +221,7 @@ function getData() {
                 }
 
                 countSocialMedia(newData);
+                barGraphCounter(newData);
             });
 
             // Listener for click events on scatter chart
@@ -228,7 +229,6 @@ function getData() {
                 var tableRow = scatterChart.getChart().getSelection()[0].row;
                 scatterChart.getChart().setSelection();
                 var personData = dataFromJSON[tableRow];
-                console.log(personData);
                 
                 if (personData) {
                     document.getElementById("id").textContent = "ID: " + personData.id;
