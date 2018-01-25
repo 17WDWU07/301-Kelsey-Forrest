@@ -103,7 +103,8 @@ function getData() {
                     ui:{
                         allowMultiple: false,
                         allowTyping: false,
-                        labelStacking:'vertical'
+                        labelStacking:'vertical',
+                        caption: 'Select Gender'
                     }
                 }
             });
@@ -254,7 +255,7 @@ function countSocialMedia(data){
                         fontName: 'sans-serif',
                         fontSize: 20
                     },
-        pieHole: 0.4,
+        pieHole: 0.9,
         backgroundColor: 'transparent'
     }
     

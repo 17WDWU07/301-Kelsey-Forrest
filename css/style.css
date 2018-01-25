@@ -80,3 +80,23 @@ body {
 .google-visualization-controls-rangefilter .google-visualization-controls-slider-horizontal {
     outline: 0;
 }
+
+/*Gender Picker */
+
+
+.google-visualization-controls-categoryfilter .goog-menu-button {
+    text-align: center;
+    margin-left: 150px;
+}
+.google-visualization-controls-categoryfilter .goog-menu-button-inner-box {
+    background-color: rgb(57, 60, 73);
+    
+}
+.google-visualization-controls-categoryfilter .goog-menu-button-outer-box {
+    border-color: white;
+    border-width: 2px;
+}
+.google-visualization-controls-categoryfilter .goog-menu-button-caption {
+color: white;
+}
+
