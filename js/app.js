@@ -36,7 +36,7 @@ function getData() {
                 chartType: 'ScatterChart',
                 containerId: 'scatterChart',
                 options:{
-                    title: 'Age Vs. Height (Click a point to see more information)',
+                    title: 'Age vs Height (Click a point to see more information)',
                     colors: ['#07e6f2'],
                     pointSize: 8,
                     hAxis:{
@@ -50,7 +50,7 @@ function getData() {
                         }
                     },
                     vAxis:{
-                        title: 'Height',
+                        title: 'Height (m)',
                         titleTextStyle:{
                             color: 'white'
                         },
@@ -139,9 +139,9 @@ function getData() {
                 containerId: 'ageSlider',
                 options:{
                     filterColumnLabel: 'Age',
-                  ui:{
-                     labelStacking:'vertical'
-                 }
+                    ui: {
+                        labelStacking:'vertical'
+                    }
                 }
             });
 
@@ -338,7 +338,7 @@ function barGraphCounter(data) {
     dataBarGraph.addRow(["Female", femaleHasCar, femaleNoCar]);
 
     var options = {
-        title: "Car Ownership Vs Gender",
+        title: "Car Ownership vs Gender",
         titleTextStyle:{
             color: 'white',
             fontName: 'sans-serif',
