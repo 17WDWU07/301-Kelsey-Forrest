@@ -16,6 +16,7 @@ function getData() {
             data.addColumn('number', 'Hours Of Work');
             data.addColumn('string', 'Social Media');
             data.addColumn('string', 'ID');
+            data.addColumn("number", "numberID")
 
             for (var i = 0; i < dataFromJSON.length; i++) {
                 data.addRow([
@@ -26,7 +27,8 @@ function getData() {
                     dataFromJSON[i].ownsCar,
                     dataFromJSON[i].workingHoursPerWeek,
                     dataFromJSON[i].preferredSocialMedia,
-                    dataFromJSON[i].id
+                    dataFromJSON[i].id,
+                    dataFromJSON[i].numberID
                 ]);
             };
 
@@ -120,6 +122,45 @@ function getData() {
                 }
             });
 
+            var areaChart = new google.visualization.ChartWrapper({
+                chartType: "SteppedAreaChart",
+                containerId: "areaChart",
+                options: {
+                    title: "Height vs ID",
+                    titleTextStyle: {
+                        color: "white"
+                    },
+                    vAxis: {
+                        title: "Height (m)",
+                        titleTextStyle: {
+                            color: "white"
+                        },
+                        textStyle: {
+                            color: "white"
+                        }
+                    },
+                    hAxis: {
+                        title: "ID",
+                        titleTextStyle: {
+                            color: "white"
+                        },
+                        textStyle: {
+                            color: "white"
+                        }
+                    },
+                    legend: {
+                        textStyle: {
+                            color: "white"
+                        }
+                    },
+                    backgroundColor: "transparent",
+                    colors: ["lightgreen"]
+                },
+                view: {
+                    columns: [7, 3]
+                }
+            });
+
             var genderPicker = new google.visualization.ControlWrapper({
                 controlType: 'CategoryFilter',
                 containerId: 'genderSelect',
@@ -145,7 +186,7 @@ function getData() {
                 }
             });
 
-            dashboard.bind([genderPicker, ageSlider], [scatterChart, bubbleChart]);
+            dashboard.bind([genderPicker, ageSlider], [scatterChart, bubbleChart, areaChart]);
             dashboard.draw(data);
             countSocialMedia(dataFromJSON);
             barGraphCounter(dataFromJSON);
@@ -235,6 +276,7 @@ function getData() {
                 var tableRow = scatterChart.getChart().getSelection()[0].row;
                 scatterChart.getChart().setSelection();
                 var personData = dataFromJSON[tableRow];
+                var description;
                 
                 if (personData) {
                     document.getElementById("id").textContent = "ID: " + personData.id;
@@ -249,6 +291,20 @@ function getData() {
                     }
                     document.getElementById("hoursOfWork").textContent = "Average Weekly Working Hours: " + personData.workingHoursPerWeek;
                     document.getElementById("favSocialMedia").textContent = "Favourite Social Media: " + personData.preferredSocialMedia;
+
+                    // Short description
+                    description = "Survey participant #" + personData.id + " is a " + personData.age + " year old " + personData.gender;
+                    description += " who is " + personData.height + " metres tall and has " + personData.eyeColor + " eyes. ";
+
+                    if (personData.ownsCar) {
+                        description += "They own a car, work " + personData.workingHoursPerWeek;
+                    } else {
+                        description += "They work " + personData.workingHoursPerWeek;
+                    }
+
+                    description += " hours a week on average and spend the most time on " + personData.preferredSocialMedia + " as their preferred Social Media platform.";
+
+                    document.getElementById("shortDescription").textContent = description;
                 }
             });
         },
